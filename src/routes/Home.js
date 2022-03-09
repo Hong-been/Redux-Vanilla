@@ -1,8 +1,10 @@
 import React, {useRef, useState} from "react";
 import { connect } from 'react-redux';
 import {addTodo} from "../store";
+import {Todo} from "../components/Todo"
 
 const Home = ({todos,dispatchAdd}) => {
+  console.log(todos);
 	const [text, setText] = useState("");
 	const inputRef = useRef();
 
@@ -32,12 +34,17 @@ const Home = ({todos,dispatchAdd}) => {
 					ADD
 				</button>
 			</form>
-      <ul>{JSON.stringify(todos)}</ul>
+      <ul>
+        {todos.map((todo)=>(
+          <Todo key={todo.id} text={todo.text}></Todo>
+        ))}
+        </ul>
 		</>
 	);
 };
 
 function mapStateToProps(state, Props){
+  console.log(state);
   return { todos: state }
 }
 
