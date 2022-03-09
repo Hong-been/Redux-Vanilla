@@ -1,24 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deleteTodo } from '../store';
+import {Link} from "react-router-dom";
 
-const Todo = ({text,dispatchDelete}) => {
+const Todo = ({id,text}) => {
+  const dispatch = useDispatch();
+
   const handleDelete = (e)=>{
     e.preventDefault();
-    dispatchDelete();
+    dispatch(deleteTodo(id));
   }
 
   return (
-    <li>
-      {text}<button onClick={handleDelete}>DEL</button>
-    </li>
+    <Link to={`/${id}`}>
+      <li>
+        {text}<button onClick={handleDelete}>DEL</button>
+      </li>
+    </Link>
   )
 }
 
-function mapDispatchToProps(dispatch,props){
-  return {
-    dispatchDelete: () => dispatch(deleteTodo(props.id)),
-  }
-}
-
-export default connect(null,mapDispatchToProps)(Todo)
+export default Todo;

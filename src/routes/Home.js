@@ -1,9 +1,12 @@
 import React, {useRef, useState} from "react";
-import { connect } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import {addTodo} from "../store";
 import Todo from "../components/Todo"
 
-const Home = ({todos,dispatchAdd}) => {
+const Home = () => {
+  const dispatch = useDispatch();
+  const todos = useSelector(store=>store);
+
 	const [text, setText] = useState("");
 	const inputRef = useRef();
 
@@ -15,7 +18,7 @@ const Home = ({todos,dispatchAdd}) => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     setText('');
-    dispatchAdd(text);
+    dispatch(addTodo(text));
   }
 
 	return (
@@ -42,14 +45,4 @@ const Home = ({todos,dispatchAdd}) => {
 	);
 };
 
-function mapStateToProps(state, Props){
-  return { todos: state }
-}
-
-function mapDispatchToProps(dispatch){
-  return {
-    dispatchAdd: text => dispatch(addTodo(text)),
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Home)
+export default Home;
