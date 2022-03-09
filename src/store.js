@@ -3,12 +3,12 @@ import {createStore} from "redux";
 const ADD = "add";
 const DELETE = "delete";
 
-const addTodo = (payload)=>{
+export const addTodo = (payload)=>{
   return (
     {type:ADD,payload}
   )};
 
-const deleteTodo = (payload)=>{
+export const deleteTodo = (payload)=>{
   return (
     {type:DELETE,payload}
   )};
@@ -16,9 +16,9 @@ const deleteTodo = (payload)=>{
   const reducer = (state = [], action) => {
     switch (action.type) {
       case ADD:
-        return [{ text: action.payload.text, id: Date.now() }, ...state];
+        return [{ text: action.payload, id: Date.now() }, ...state];
       case DELETE:
-        return state.filter(toDo => toDo !== action.payload.id);
+        return state.filter(toDo => toDo !== action.payload);
       default:
         return state;
     }

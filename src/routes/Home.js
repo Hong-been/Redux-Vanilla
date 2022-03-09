@@ -1,6 +1,8 @@
 import React, {useRef, useState} from "react";
+import { connect } from 'react-redux';
+import {addTodo} from "../store";
 
-export const Home = () => {
+const Home = ({todos,dispatchAdd}) => {
 	const [text, setText] = useState("");
 	const inputRef = useRef();
 
@@ -12,6 +14,7 @@ export const Home = () => {
   const handleSubmit = (e) =>{
     e.preventDefault();
     setText('');
+    dispatchAdd(text);
   }
 
 	return (
@@ -29,6 +32,19 @@ export const Home = () => {
 					ADD
 				</button>
 			</form>
+      <ul>{JSON.stringify(todos)}</ul>
 		</>
 	);
 };
+
+function mapStateToProps(state, Props){
+  return { todos: state }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    dispatchAdd: text => dispatch(addTodo(text)),
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home)
