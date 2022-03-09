@@ -18,7 +18,7 @@ export const deleteTodo = (payload)=>{
       case ADD:
         return [{ text: action.payload, id: Date.now() }, ...state];
       case DELETE:
-        return state.filter(toDo => toDo !== action.payload);
+        return state.filter(toDo => toDo.id !== action.payload);
       default:
         return state;
     }
