@@ -12,7 +12,7 @@ const Home = () => {
 
 	const handleChange = () => {
 		const cur = inputRef.current?.value;
-		setText(cur ? cur : text);
+		setText(cur ? cur : '');
 	};
 
   const handleSubmit = (e) =>{
