@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
-import { useSelector,useDispatch } from 'react-redux';
-import {AddAction} from "../store";
+import { useSelector,useDispatch} from 'react-redux';
+import {add} from "../store";
 import Todo from "../components/Todo"
 
 const Home = () => {
@@ -10,8 +10,7 @@ const Home = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-		console.log(e);
-    dispatch(AddAction(inputRef.current.value));
+    dispatch(add(inputRef.current.value));
 		inputRef.current.value="";
   }
 

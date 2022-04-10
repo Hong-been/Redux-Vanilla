@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import {DeleteAction} from "../store";
+import {remove} from "../store";
 import {Link} from "react-router-dom";
 
 const Todo = ({id,text}) => {
@@ -8,7 +8,7 @@ const Todo = ({id,text}) => {
 
   const handleDelete = (e)=>{
     e.preventDefault();
-    dispatch(DeleteAction(id));
+    dispatch(remove(id));
   }
 
   return (
