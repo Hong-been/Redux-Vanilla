@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useRef} from "react";
 import { useSelector,useDispatch } from 'react-redux';
 import {AddAction} from "../store";
 import Todo from "../components/Todo"
@@ -6,19 +6,13 @@ import Todo from "../components/Todo"
 const Home = () => {
   const dispatch = useDispatch();
   const todos = useSelector(store=>store);
-
-	const [text, setText] = useState("");
 	const inputRef = useRef();
-
-	const handleChange = () => {
-		const cur = inputRef.current?.value;
-		setText(cur ? cur : '');
-	};
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    setText('');
-    dispatch(AddAction(text));
+		console.log(e);
+    dispatch(AddAction(inputRef.current.value));
+		inputRef.current.value="";
   }
 
 	return (
@@ -29,8 +23,6 @@ const Home = () => {
 					ref={inputRef}
 					type="text"
 					placeholder="Enter"
-					value={text}
-					onChange={handleChange}
 				></input>
 				<button type="submit">
 					ADD

@@ -1,5 +1,4 @@
-import {createStore} from "redux"; 
-import {createAction, createReducer} from "@reduxjs/toolkit";
+import {configureStore, createAction, createReducer} from "@reduxjs/toolkit";
 
 export const AddAction = createAction("add");
 export const DeleteAction = createAction("delete");
@@ -13,6 +12,6 @@ const reducer = createReducer([],{
   },
 })
 
-const store = createStore(reducer);
+const store = configureStore({reducer});
 
 export default store;
