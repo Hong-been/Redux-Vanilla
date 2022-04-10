@@ -1,27 +1,18 @@
 import {createStore} from "redux"; 
+import {createAction} from "@reduxjs/toolkit";
 
-const ADD = "add";
-const DELETE = "delete";
-
-export const AddActionCreator = (payload)=>{
-  return (
-    {type:ADD,payload}
-  )};
-
-export const DeleteActionCreator = (payload)=>{
-  return (
-    {type:DELETE,payload}
-  )};
+export const AddActionCreator = createAction("add");
+export const DeleteActionCreator = createAction("delete");
 
   const reducer = (state = [], action) => {
     console.log("pre: ",state,action.type);
     switch (action.type) {
-      case ADD:{
+      case AddActionCreator.type:{
         const newState = [{ text: action.payload, id: Date.now() }, ...state];
         console.log("next: ",newState);
         return newState;
       }
-      case DELETE:{
+      case DeleteActionCreator.type:{
         const newState = state.filter(toDo => toDo.id !== action.payload);
         console.log("next: ",newState);
         return newState;
